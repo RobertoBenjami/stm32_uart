@@ -1,5 +1,5 @@
-#ifndef _UART1_H
-#define _UART1_H
+#ifndef __UARTX_H__
+#define __UARTX_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -129,4 +129,4 @@ __weak void uart5_cbrxof(void);
 }
 #endif
 
-#endif  //  _UART1_H
+#endif  /* __UARTX_H__ */
