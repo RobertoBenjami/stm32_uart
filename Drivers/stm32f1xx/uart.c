@@ -75,7 +75,7 @@ const uint8_t rcc_dividetable[] = {0, 0, 0, 0, 1, 2, 3, 4};
 
 //----------------------------------------------------------------------------
 // Itt lehet meghatározni melyik uart-ot akarjuk használni
-#if UART1_BAUDRATE > 0 && (GPIOX_PORTNUM(UART1_RX) >= GPIOX_PORTNUM_A || GPIOX_PORTNUM(UART1_TX) >= GPIOX_PORTNUM_A)
+#if UART1_BAUDRATE > 0 && (GPIOX_PORTNUM(UART1_RX) >= GPIOX_PORTNUM_A && RXBUF1_SIZE >= 4 || GPIOX_PORTNUM(UART1_TX) >= GPIOX_PORTNUM_A && TXBUF1_SIZE >= 4)
 #define UARTX                 USART1
 #define UARTX_IRQHandler      USART1_IRQHandler
 #define UARTX_IRQn            USART1_IRQn
@@ -102,7 +102,7 @@ const uint8_t rcc_dividetable[] = {0, 0, 0, 0, 1, 2, 3, 4};
 #include "uartx.h"
 #endif
 
-#if UART2_BAUDRATE > 0 && (GPIOX_PORTNUM(UART2_RX) >= GPIOX_PORTNUM_A || GPIOX_PORTNUM(UART2_TX) >= GPIOX_PORTNUM_A)
+#if UART2_BAUDRATE > 0 && (GPIOX_PORTNUM(UART2_RX) >= GPIOX_PORTNUM_A && RXBUF2_SIZE >= 4 || GPIOX_PORTNUM(UART2_TX) >= GPIOX_PORTNUM_A && TXBUF2_SIZE >= 4)
 #define UARTX                 USART2
 #define UARTX_IRQHandler      USART2_IRQHandler
 #define UARTX_IRQn            USART2_IRQn
@@ -129,7 +129,7 @@ const uint8_t rcc_dividetable[] = {0, 0, 0, 0, 1, 2, 3, 4};
 #include "uartx.h"
 #endif
 
-#if UART3_BAUDRATE > 0 && (GPIOX_PORTNUM(UART3_RX) >= GPIOX_PORTNUM_A || GPIOX_PORTNUM(UART3_TX) >= GPIOX_PORTNUM_A)
+#if UART3_BAUDRATE > 0 && (GPIOX_PORTNUM(UART3_RX) >= GPIOX_PORTNUM_A && RXBUF3_SIZE >= 4 || GPIOX_PORTNUM(UART3_TX) >= GPIOX_PORTNUM_A && TXBUF3_SIZE >= 4)
 #define UARTX                 USART3
 #define UARTX_IRQHandler      USART3_IRQHandler
 #define UARTX_IRQn            USART3_IRQn
@@ -156,7 +156,7 @@ const uint8_t rcc_dividetable[] = {0, 0, 0, 0, 1, 2, 3, 4};
 #include "uartx.h"
 #endif
 
-#if UART4_BAUDRATE > 0 && (GPIOX_PORTNUM(UART4_RX) >= GPIOX_PORTNUM_A || GPIOX_PORTNUM(UART4_TX) >= GPIOX_PORTNUM_A)
+#if UART4_BAUDRATE > 0 && (GPIOX_PORTNUM(UART4_RX) >= GPIOX_PORTNUM_A && RXBUF4_SIZE >= 4 || GPIOX_PORTNUM(UART4_TX) >= GPIOX_PORTNUM_A && TXBUF4_SIZE >= 4)
 #define UARTX                 UART4
 #define UARTX_IRQHandler      UART4_IRQHandler
 #define UARTX_IRQn            UART4_IRQn
@@ -183,7 +183,7 @@ const uint8_t rcc_dividetable[] = {0, 0, 0, 0, 1, 2, 3, 4};
 #include "uartx.h"
 #endif
 
-#if UART5_BAUDRATE > 0 && (GPIOX_PORTNUM(UART5_RX) >= GPIOX_PORTNUM_A || GPIOX_PORTNUM(UART5_TX) >= GPIOX_PORTNUM_A)
+#if UART5_BAUDRATE > 0 && (GPIOX_PORTNUM(UART5_RX) >= GPIOX_PORTNUM_A && RXBUF5_SIZE >= 4 || GPIOX_PORTNUM(UART5_TX) >= GPIOX_PORTNUM_A && TXBUF5_SIZE >= 4)
 #define UARTX                 UART5
 #define UARTX_IRQHandler      UART5_IRQHandler
 #define UARTX_IRQn            UART5_IRQn

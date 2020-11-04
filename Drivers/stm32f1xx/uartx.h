@@ -1,17 +1,17 @@
 //----------------------------------------------------------------------------
-#if TXBUFX_SIZE < 2
-#error TXBUFx_SIZE is too small.  It must be larger than 1.
-#elif ((TXBUFX_SIZE & (TXBUFX_SIZE-1)) != 0)
-#error TBUF_SIZE must be a power of 2.
+#if RXBUFX_SIZE < 4
+#ifdef  UARTX_RX
+#undef  UARTX_RX
+#endif
+#define UARTX_RX  X, 0
 #endif
 
-#if RXBUFX_SIZE < 2
-#error RXBUFX_SIZE is too small.  It must be larger than 1.
-#elif ((RXBUFX_SIZE & (RXBUFX_SIZE-1)) != 0)
-#error RXBUFX_SIZE must be a power of 2.
+#if TXBUFX_SIZE < 4
+#ifdef  UARTX_TX
+#undef  UARTX_TX
 #endif
-
-//----------------------------------------------------------------------------
+#define UARTX_TX  X, 0
+#endif
 
 #if GPIOX_PORTNUM(UARTX_RX) >= GPIOX_PORTNUM_A
 struct bufx_r {
@@ -20,7 +20,7 @@ struct bufx_r {
   char buf [RXBUFX_SIZE];               /* Buffer */
 };
 volatile static struct bufx_r rbufx = { 0, 0, };
-#define SIO_RBUFLEN ((unsigned int)(rbufx.in - rbufx.out))
+#define FIFO_RBUFLEN ((unsigned int)(rbufx.in - rbufx.out))
 __weak void uartx_cbrx(char rxch) { }
 __weak void uartx_cbrxof(void)  { }
 #endif
@@ -33,7 +33,7 @@ struct bufx_t {
   char buf [TXBUFX_SIZE];               /* Buffer */
 };
 volatile static struct bufx_t tbufx = { 0, 0, };
-#define SIO_TBUFLEN ((unsigned int)(tbufx.in - tbufx.out))
+#define FIFO_TBUFLEN ((unsigned int)(tbufx.in - tbufx.out))
 #endif
 
 void uartx_init(void);
@@ -124,7 +124,7 @@ char uartx_sendchar(char c)
     uartx_inited = 1;
   }
 
-  while(SIO_TBUFLEN >= TXBUFX_SIZE);
+  while(FIFO_TBUFLEN >= TXBUFX_SIZE);
 
   tbufx.buf[tbufx.in & (TXBUFX_SIZE - 1)] = c; /* Add data to the transmit buffer */
   tbufx.in++;

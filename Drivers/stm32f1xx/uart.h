@@ -29,11 +29,12 @@ extern "C" {
    - UARTx_REMAP: The location of the uart pins can be changed (see in the datasheet)
        UART1_REMAP 0 -> (TX=A9, RX=A10),  UART1_REMAP 1 -> (TX=B6, RX=B7)
        UART2_REMAP 0 -> (TX=A2, RX=A3),   UART2_REMAP 1 -> (TX=D5, RX=D6)
-       UART3_REMAP 0 -> (TX=B10, RX=B11), UART2_REMAP 1 -> (TX=C10, RX=C11), UART2_REMAP 3 -> (TX=D8, RX=D9)
+       UART3_REMAP 0 -> (TX=B10, RX=B11), UART3_REMAP 1 -> (TX=C10, RX=C11), UART3_REMAP 3 -> (TX=D8, RX=D9)
        note: UART4 (TX=C10, RX=C11) and UART5 (TX=C12, RX=D2) remap not possible
 
    - TXBUFx_SIZE, RXBUFx_SIZE: buffer size (4,8,16,32,64,128,256,512,1024,2048,...)
-       note: the buffer size should be (2 ^ n) !
+       note: if 0 -> RX or TX function will not be available
+             the buffer size should be (2 ^ n) !
 
    - UARTx_PRINTF (printf redirect): 0 -> printf to uart disabled, 1 -> printf to uart eanbled
        note: can only be active on one usart
@@ -63,7 +64,7 @@ extern "C" {
 #define  UART1_REMAP   0
 #define  TXBUF1_SIZE  64
 #define  RXBUF1_SIZE  64
-#define  UART1_PRINTF  1
+#define  UART1_PRINTF  0
 
 char     uart1_sendchar(char c);
 char     uart1_getchar(char * c);
@@ -75,8 +76,8 @@ __weak void uart1_cbrxof(void);
 #define  UART2_RX   A, 3
 #define  UART2_TX   A, 2
 #define  UART2_REMAP   0
-#define  TXBUF2_SIZE  64
 #define  RXBUF2_SIZE  64
+#define  TXBUF2_SIZE  64
 #define  UART2_PRINTF  0
 
 char     uart2_sendchar(char c);
@@ -89,8 +90,8 @@ __weak void uart2_cbrxof(void);
 #define  UART3_RX  B, 10
 #define  UART3_TX  B, 11
 #define  UART3_REMAP   0
-#define  TXBUF3_SIZE  64
 #define  RXBUF3_SIZE  64
+#define  TXBUF3_SIZE  64
 #define  UART3_PRINTF  0
 
 char     uart3_sendchar(char c);
@@ -102,8 +103,8 @@ __weak void uart3_cbrxof(void);
 #define  UART4_BAUDRATE  0
 #define  UART4_RX  C, 11
 #define  UART4_TX  C, 10
-#define  TXBUF4_SIZE  64
 #define  RXBUF4_SIZE  64
+#define  TXBUF4_SIZE  64
 #define  UART4_PRINTF  0
 
 char     uart4_sendchar(char c);
@@ -115,8 +116,8 @@ __weak void uart4_cbrxof(void);
 #define  UART5_BAUDRATE  0
 #define  UART5_RX  D, 2
 #define  UART5_TX  C, 12
-#define  TXBUF5_SIZE  64
 #define  RXBUF5_SIZE  64
+#define  TXBUF5_SIZE  64
 #define  UART5_PRINTF  0
 
 char     uart5_sendchar(char c);
