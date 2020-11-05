@@ -91,7 +91,6 @@
 #define GPIOX_PORTNAME(a)     GPIOX_PORTNAME_(a)
 
 //----------------------------------------------------------------------------
-// Itt lehet meghatározni melyik uart-ot akarjuk használni
 #if UART1_BAUDRATE > 0 && (GPIOX_PORTNUM(UART1_RX) >= GPIOX_PORTNUM_A && RXBUF1_SIZE >= 4 || GPIOX_PORTNUM(UART1_TX) >= GPIOX_PORTNUM_A && TXBUF1_SIZE >= 4)
 #define UARTX                 USART1
 #define UARTX_IRQHandler      USART1_IRQHandler
