@@ -50,14 +50,14 @@ void mainApp(void)
       {
         uart1_sendchar(ch);
       }
-      pre_linescount++;
+      pre_linescount = linescount;
     }
 
     /* RX buffer overflow detect */
     if(rxof > pre_rxof)
     {
       printf("rx buffer overflowed:%d\r\n", rxof);
-      pre_rxof++;
+      pre_rxof = rxof;
     }
   }
 }
