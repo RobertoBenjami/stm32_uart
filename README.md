@@ -1,10 +1,14 @@
-# stm32_uart
+# Stm32_uart
 
-stm32 uart driver
+Stm32 uart driver
   This driver also uses an interrupt and an adjustable buffer for sending and receiving.
   When receiving, it is possible to use a callback function for each character received.
   Thus, it is possible e.g. to detect the end of line character.
   Initialization will occur during the first use, so there is no uart_init function.
+
+Can be used in microcontroller families:
+- stm32f1xx
+- stm32h7xx
   
 Example app:
 - app_uart_test: 
