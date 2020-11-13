@@ -56,7 +56,7 @@ extern "C" {
    - uartx_sendchar: send one character to usart
        note: if the TX buffer is full, it will wait until there is free space in it
 
-   - uart1_getchar: receiving a character on uart rx
+   - uartx_getchar: receiving a character on uart rx
        note: if return = 0 -> no characters received (not block the program from running)
              if return = 1 -> &c = received character
 

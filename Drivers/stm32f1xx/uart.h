@@ -1,6 +1,7 @@
 #ifndef __UARTX_H__
 #define __UARTX_H__
 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -8,7 +9,7 @@ extern "C" {
 //----------------------------------------------------------------------------
 /* Uart RX and TX driver for stm32f1xx
      author  : Roberto Benjami
-     version : 2020.11.04
+     version : 2020.11.13
 
    This driver also uses an interrupt and an adjustable buffer for sending and receiving.
    When receiving, it is possible to use a callback function for each character received.
@@ -19,7 +20,13 @@ extern "C" {
    - UART_PRIORITY: UART RX and TX interrupt priority (0..15)
        note: 0 = the highest priority, 15 = the lowest priority
 
-   - UART1_BAUDRATE: Baud rate
+   - UART_1_CLK: USART1 source frequency
+       note: default (SystemCoreClock)
+
+   - UART_2_3_4_5_CLK: USART2,3,4,5 source frequency
+       note: default (SystemCoreClock >> 1)
+
+   - UARTx_BAUDRATE: Baud rate
        note: if Baud Rate = 0 -> this Uart not used
 
    - UARTx_RX, UARTx_TX: port name, pin number (if not used -> X, 0)
@@ -42,7 +49,7 @@ extern "C" {
    - uartx_sendchar: send one character to usart
        note: if the TX buffer is full, it will wait until there is free space in it
 
-   - uart1_getchar: receiving a character on uart rx
+   - uartx_getchar: receiving a character on uart rx
        note: if return = 0 -> no characters received (not block the program from running)
              if return = 1 -> &c = received character
 
@@ -57,10 +64,13 @@ extern "C" {
 //----------------------------------------------------------------------------
 #define  UART_PRIORITY   15
 
+#define  UART_1_CLK                SystemCoreClock
+#define  UART_2_3_4_5_CLK          SystemCoreClock >> 1
+
 //----------------------------------------------------------------------------
 #define  UART1_BAUDRATE  0
 #define  UART1_RX  A, 10
-#define  UART1_TX   A, 9
+#define  UART1_TX  A,  9
 #define  UART1_REMAP   0
 #define  TXBUF1_SIZE  64
 #define  RXBUF1_SIZE  64
@@ -114,7 +124,7 @@ __weak void uart4_cbrxof(void);
 
 //----------------------------------------------------------------------------
 #define  UART5_BAUDRATE  0
-#define  UART5_RX  D, 2
+#define  UART5_RX  D,  2
 #define  UART5_TX  C, 12
 #define  RXBUF5_SIZE  64
 #define  TXBUF5_SIZE  64

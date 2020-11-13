@@ -1,6 +1,6 @@
 /* Uart RX and TX driver for stm32f1xx
      author  : Roberto Benjami
-     version : 2020.11.04
+     version : 2020.11.13
 */
 
 #include <stdio.h>
@@ -70,15 +70,12 @@
 #define GPIOX_PORTNAME(a)     GPIOX_PORTNAME_(a)
 
 //----------------------------------------------------------------------------
-const uint8_t rcc_dividetable[] = {0, 0, 0, 0, 1, 2, 3, 4};
-
-//----------------------------------------------------------------------------
 #if UART1_BAUDRATE > 0 && (GPIOX_PORTNUM(UART1_RX) >= GPIOX_PORTNUM_A && RXBUF1_SIZE >= 4 || GPIOX_PORTNUM(UART1_TX) >= GPIOX_PORTNUM_A && TXBUF1_SIZE >= 4)
 #define UARTX                 USART1
 #define UARTX_IRQHandler      USART1_IRQHandler
 #define UARTX_IRQn            USART1_IRQn
 #define UARTX_CLOCLK_ON       RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
-#define UARTX_BRR_CALC        (SystemCoreClock >> rcc_dividetable[(RCC->CFGR & RCC_CFGR_PPRE2_Msk) >> RCC_CFGR_PPRE2_Pos]) / UART1_BAUDRATE
+#define UARTX_BRR_CALC        (UART_1_CLK) / UART1_BAUDRATE
 #define UARTX_RX              UART1_RX
 #define UARTX_TX              UART1_TX
 #define UARTX_REMAP           UART1_REMAP
@@ -105,7 +102,7 @@ const uint8_t rcc_dividetable[] = {0, 0, 0, 0, 1, 2, 3, 4};
 #define UARTX_IRQHandler      USART2_IRQHandler
 #define UARTX_IRQn            USART2_IRQn
 #define UARTX_CLOCLK_ON       RCC->APB1ENR |= RCC_APB1ENR_USART2EN;
-#define UARTX_BRR_CALC        (SystemCoreClock >> rcc_dividetable[(RCC->CFGR & RCC_CFGR_PPRE1_Msk) >> RCC_CFGR_PPRE1_Pos]) / UART2_BAUDRATE
+#define UARTX_BRR_CALC        (UART_2_3_4_5_CLK) / UART2_BAUDRATE
 #define UARTX_RX              UART2_RX
 #define UARTX_TX              UART2_TX
 #define UARTX_REMAP           UART2_REMAP
@@ -132,7 +129,7 @@ const uint8_t rcc_dividetable[] = {0, 0, 0, 0, 1, 2, 3, 4};
 #define UARTX_IRQHandler      USART3_IRQHandler
 #define UARTX_IRQn            USART3_IRQn
 #define UARTX_CLOCLK_ON       RCC->APB1ENR |= RCC_APB1ENR_USART3EN;
-#define UARTX_BRR_CALC        (SystemCoreClock >> rcc_dividetable[(RCC->CFGR & RCC_CFGR_PPRE1_Msk) >> RCC_CFGR_PPRE1_Pos]) / UART3_BAUDRATE
+#define UARTX_BRR_CALC        (UART_2_3_4_5_CLK) / UART3_BAUDRATE
 #define UARTX_RX              UART3_RX
 #define UARTX_TX              UART3_TX
 #define UARTX_REMAP           UART3_REMAP
@@ -159,7 +156,7 @@ const uint8_t rcc_dividetable[] = {0, 0, 0, 0, 1, 2, 3, 4};
 #define UARTX_IRQHandler      UART4_IRQHandler
 #define UARTX_IRQn            UART4_IRQn
 #define UARTX_CLOCLK_ON       RCC->APB1ENR |= RCC_APB1ENR_UART4EN;
-#define UARTX_BRR_CALC        (SystemCoreClock >> rcc_dividetable[(RCC->CFGR & RCC_CFGR_PPRE1_Msk) >> RCC_CFGR_PPRE1_Pos]) / UART4_BAUDRATE
+#define UARTX_BRR_CALC        (UART_2_3_4_5_CLK) / UART4_BAUDRATE
 #define UARTX_RX              UART4_RX
 #define UARTX_TX              UART4_TX
 #define UARTX_REMAP           0
@@ -186,7 +183,7 @@ const uint8_t rcc_dividetable[] = {0, 0, 0, 0, 1, 2, 3, 4};
 #define UARTX_IRQHandler      UART5_IRQHandler
 #define UARTX_IRQn            UART5_IRQn
 #define UARTX_CLOCLK_ON       RCC->APB1ENR |= RCC_APB1ENR_UART5EN;
-#define UARTX_BRR_CALC        (SystemCoreClock >> rcc_dividetable[(RCC->CFGR & RCC_CFGR_PPRE1_Msk) >> RCC_CFGR_PPRE1_Pos]) / UART5_BAUDRATE
+#define UARTX_BRR_CALC        (UART_2_3_4_5_CLK) / UART5_BAUDRATE
 #define UARTX_RX              UART5_RX
 #define UARTX_TX              UART5_TX
 #define UARTX_REMAP           0
