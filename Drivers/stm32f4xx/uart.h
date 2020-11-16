@@ -25,7 +25,7 @@ extern "C" {
    - UART_2_3_4_5_7_8_CLK: USART2,3,4,5,7,8 source frequency
        note: default (SystemCoreClock >> 2)
 
-   - UART1_BAUDRATE: Baud rate (bit/sec)
+   - UARTx_BAUDRATE: Baud rate (bit/sec)
        note: if Baud Rate = 0 -> this uart not used
 
    - UARTx_RX, UARTx_TX: port name, pin number, AF number (if not used -> X, 0, 0)
