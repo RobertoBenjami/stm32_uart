@@ -13,6 +13,25 @@
 #define UARTX_TX  X, 0, 0
 #endif
 
+/*----------------------------------------------------------------------------
+   CMSIS compatible chapter
+----------------------------------------------------------------------------*/
+#if     __STM32H7xx_CMSIS_DEVICE_VERSION == 0
+#undef  __STM32H7xx_CMSIS_DEVICE_VERSION
+#define __STM32H7xx_CMSIS_DEVICE_VERSION  ((__STM32H7xx_CMSIS_DEVICE_VERSION_MAIN << 24)\
+                                          |(__STM32H7xx_CMSIS_DEVICE_VERSION_SUB1 << 16)\
+                                          |(__STM32H7xx_CMSIS_DEVICE_VERSION_SUB2 << 8 )\
+                                          |(__STM32H7xx_CMSIS_DEVICE_VERSION_RC))
+#if __STM32H7xx_CMSIS_DEVICE_VERSION >= 0x01040000
+#define USART_ISR_RXNE  USART_ISR_RXNE_RXFNE
+#define USART_ISR_TXE   USART_ISR_TXE_TXFNF
+#define USART_ICR_NCF   USART_ICR_NECF
+#endif
+#endif
+
+/*----------------------------------------------------------------------------
+  USARTX variable
+ *----------------------------------------------------------------------------*/
 #if GPIOX_PORTNUM(UARTX_RX) >= GPIOX_PORTNUM_A
 struct bufx_r {
   unsigned int in;                      /* Next In Index */
@@ -38,7 +57,6 @@ volatile static struct bufx_t tbufx = { 0, 0, };
 
 void uartx_init(void);
 static unsigned int uartx_inited = 0;  /* 0: not intit (call the uart_init), 1: after init */
-
 
 /*----------------------------------------------------------------------------
   USARTX_IRQHandler
