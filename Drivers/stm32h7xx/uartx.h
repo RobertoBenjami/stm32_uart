@@ -45,7 +45,7 @@ __weak void uartx_cbrxof(void)  { }
 #endif
 
 #if GPIOX_PORTNUM(UARTX_TX) >= GPIOX_PORTNUM_A
-static unsigned int txx_restart = 1;    /* NZ if TX restart is required */
+static volatile unsigned int txx_restart = 1; /* NZ if TX restart is required */
 struct bufx_t {
   unsigned int in;                      /* Next In Index */
   unsigned int out;                     /* Next Out Index */
