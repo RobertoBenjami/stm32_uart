@@ -36,26 +36,26 @@ Uart functions:
         attention, it will be operated from an interruption!
 
 Uart settings in uart.h (see the comments in this header):
-  f0, f2, f3, f4, f7, h7 family:  
-  - UARTx_RX, UARTx_TX: port name, pin number, AF number (if not used -> X, 0, 0)
+f0, f2, f3, f4, f7, h7 family:  
+- UARTx_RX, UARTx_TX: port name, pin number, AF number (if not used -> X, 0, 0)
 
-  f1 family:
-  - UARTx_RX, UARTx_TX: port name, pin number (if not used -> X, 0)
-    note: see the data sheet which pin can be adjusted
-    it is possible to use only the transmission or only the reception on its own
-  - UARTx_REMAP: The location of the uart pins can be changed (see in the datasheet)
+f1 family:
+- UARTx_RX, UARTx_TX: port name, pin number (if not used -> X, 0)
+  note: see the data sheet which pin can be adjusted
+  it is possible to use only the transmission or only the reception on its own
+- UARTx_REMAP: The location of the uart pins can be changed (see in the datasheet)
 
-  all family:
-  - UARTx_BAUDRATE: Baud rate (bit/sec)
-    note: if Baud Rate = 0 -> this uart not used
+all family:
+- UARTx_BAUDRATE: Baud rate (bit/sec)
+  note: if Baud Rate = 0 -> this uart not used
 
-  - TXBUFx_SIZE, RXBUFx_SIZE: buffer size (4,8,16,32,64,128,256,512,1024,2048,...)
-    note: the buffer size should be (2 ^ n) !
+- TXBUFx_SIZE, RXBUFx_SIZE: buffer size (4,8,16,32,64,128,256,512,1024,2048,...)
+  note: the buffer size should be (2 ^ n) !
 
-  - UARTx_PRINTF (printf redirect): 0 -> printf to uart disabled, 1 -> printf to uart eanbled
-    note: can only be active on one usart
+- UARTx_PRINTF (printf redirect): 0 -> printf to uart disabled, 1 -> printf to uart eanbled
+  note: can only be active on one usart
 
-  - UART_X_CLK: USART source frequency (see the comment in the header file)
+- UART_X_CLK: USART source frequency (see the comment in the header file)
 
-  - UART_PRIORITY: UART RX and TX interrupt priority (0..15)
-    note: 0 = the highest priority, 15 = the lowest priority
+- UART_PRIORITY: UART RX and TX interrupt priority (0..15)
+  note: 0 = the highest priority, 15 = the lowest priority
