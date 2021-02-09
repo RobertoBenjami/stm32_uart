@@ -1,12 +1,11 @@
 # Stm32_uart driver
 
-Stm32 uart driver
-  This driver also uses an interrupt and an adjustable buffer for sending and receiving.
-  When receiving, it is possible to use a callback function for each character received.
-  Thus, it is possible e.g. to detect the end of line character.
-  Initialization will occur during the first use, so there is no uart_init function.
+This driver also uses an interrupt and an adjustable buffer for sending and receiving.
+When receiving, it is possible to use a callback function for each character received.
+Thus, it is possible e.g. to detect the end of line character.
+Initialization will occur during the first use, so there is no uart_init function.
 
-Can be used in microcontroller families:
+#Can be used in microcontroller families
 - stm32f0xx
 - stm32f1xx
 - stm32f2xx
@@ -15,12 +14,12 @@ Can be used in microcontroller families:
 - stm32f7xx
 - stm32h7xx
   
-Example app:
+#Example app
 - app_uart_test: 
     This program shows how to receive and forward text data received on a serial line
     with line-by-line processing. 
 
-Uart functions:
+#Uart functions
 - uartx_sendchar(char c): send one character to usart
   note: if the TX buffer is full, it will wait until there is free space in it
 
@@ -35,7 +34,7 @@ Uart functions:
   note: if this function is enabled, RX data loss has occurred
         attention, it will be operated from an interruption!
 
-Uart settings in uart.h (see the comments in this header):
+#Uart settings in uart.h (see the comments in this header)
 f0, f2, f3, f4, f7, h7 family:  
 - UARTx_RX, UARTx_TX: port name, pin number, AF number (if not used -> X, 0, 0)
 
